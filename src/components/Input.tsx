@@ -33,17 +33,18 @@ export function Input(props: InputType) {
     return (
         <div>
             <TextField variant="outlined"
-                       className={error ? "error" : ""}
+                       error={!!error}
                        value={title}
                        onChange={onChangeHandler}
                        onKeyDown={onKeyPressHandler}
+                       label="Title"
+                       helperText={error}
                        />
             <Button variant="contained"
                     style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}
                     color="primary"
                     onClick={onclickHandler}
             >+</Button>
-            {error && <div className="error-message">{error}</div>}
         </div>
     )
 }
