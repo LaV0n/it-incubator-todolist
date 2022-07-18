@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {Button, TextField} from "@material-ui/core";
+import { IconButton, TextField} from "@material-ui/core";
+import {AddBox} from "@material-ui/icons";
 
 type InputType = {
     callback: (value: string) => void
@@ -40,11 +41,11 @@ export function Input(props: InputType) {
                        label="Title"
                        helperText={error}
                        />
-            <Button variant="contained"
-                    style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}
+            <IconButton
                     color="primary"
-                    onClick={onclickHandler}
-            >+</Button>
+                    onClick={onclickHandler}>
+                <AddBox/>
+            </IconButton>
         </div>
     )
 }
