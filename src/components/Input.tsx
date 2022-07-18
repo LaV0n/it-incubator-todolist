@@ -1,10 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {Button, TextField} from "@material-ui/core";
 
-type InputType ={
-    callback:(value:string)=> void
+type InputType = {
+    callback: (value: string) => void
 }
 
-export function Input (props:InputType) {
+export function Input(props: InputType) {
 
     let [title, setTitle] = useState('');
     let [error, setError] = useState<string | null>(null);
@@ -13,7 +14,7 @@ export function Input (props:InputType) {
         if (title.trim() !== "") {
             props.callback(title);
             setTitle('');
-        }else{
+        } else {
             setError('Title is required')
         }
     }
@@ -31,13 +32,18 @@ export function Input (props:InputType) {
 
     return (
         <div>
-            <input className={error ?"error": ""}
-                   value={title}
-                   onChange={onChangeHandler}
-                   onKeyDown={onKeyPressHandler}
-            />
-            <button onClick={onclickHandler}>+</button>
-            { error &&  <div className="error-message">{error}</div>}
+            <TextField variant="outlined"
+                       className={error ? "error" : ""}
+                       value={title}
+                       onChange={onChangeHandler}
+                       onKeyDown={onKeyPressHandler}
+                       />
+            <Button variant="contained"
+                    style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}
+                    color="primary"
+                    onClick={onclickHandler}
+            >+</Button>
+            {error && <div className="error-message">{error}</div>}
         </div>
     )
 }
