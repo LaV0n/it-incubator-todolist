@@ -47,9 +47,9 @@ export const changeTaskTitleAC = (id: string, newTitle: string, todolistId: stri
     return {type: 'CHANGE-TITLE-TASK', id: id, newTitle: newTitle, todolistId: todolistId}
 }
 
+const initialState:TasksStateType={}
 
-
-export const tasksReducer = (state: TasksStateType, action: ActionType) => {
+export const tasksReducer = (state=initialState, action: ActionType):TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK':
             return {...state, [action.todolistId]: state[action.todolistId].filter(t => t.id !== action.taskId)};
@@ -67,6 +67,6 @@ export const tasksReducer = (state: TasksStateType, action: ActionType) => {
             delete copy[action.id]
             return copy
         default:
-            throw new Error("I don't understand this type")
+            return state;
     }
 }

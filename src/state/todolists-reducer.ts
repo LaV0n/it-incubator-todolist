@@ -1,4 +1,4 @@
-import {FilterValuesType, TodolistType} from "../App";
+import {FilterValuesType, TasksStateType, TodolistType} from "../App";
 import {v1} from 'uuid';
 
 type ActionType =
@@ -39,9 +39,9 @@ export const ChangeTodolistTitleAC = (title: string,id:string): ChangeTodoListTi
 export const ChangeTodolistFilterAC = (id:string,filter:FilterValuesType): ChangeTodoListFilterActionType => {
     return { type: 'CHANGE-TODOLIST-FILTER', id:id, filter:filter}
 }
+const initialState:TodolistType[]=[]
 
-
-export const todolistsReducer = (state: Array<TodolistType>, action: ActionType) => {
+export const todolistsReducer = (state=initialState, action: ActionType) => {
     switch (action.type) {
         case 'REMOVE-TODOLIST':
             return state.filter(tl=>tl.id!==action.id);
@@ -53,6 +53,6 @@ export const todolistsReducer = (state: Array<TodolistType>, action: ActionType)
         case 'CHANGE-TODOLIST-FILTER':
             return state.map(tl=>tl.id===action.id?{...tl,filter:action.filter}:tl);
         default:
-            throw new Error("I don't understand this type")
+           return state
     }
 }
