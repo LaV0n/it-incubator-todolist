@@ -66,6 +66,7 @@ function AppWithRedux() {
     },[dispatch])
 
     const changeTodolistTitle=useCallback((id: string, title: string) =>{
+
         const action = ChangeTodolistTitleAC(id, title);
         dispatch(action);
     },[dispatch])

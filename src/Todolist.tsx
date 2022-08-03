@@ -1,4 +1,4 @@
-import React, { useCallback} from 'react';
+import React, {useCallback} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
@@ -35,9 +35,10 @@ export const Todolist = React.memo((props: PropsType) => {
         const removeTodolist = () => {
             props.removeTodolist(props.id);
         }
-        const changeTodolistTitle = (title: string) => {
+        const changeTodolistTitle = useCallback((title: string) => {
+
             props.changeTodolistTitle(props.id, title);
-        }
+        },[props.changeTodolistTitle,props.id])
 
         const onAllClickHandler = useCallback(() => props.changeFilter("all", props.id), [props.changeFilter, props.id]);
         const onActiveClickHandler = useCallback(() => props.changeFilter("active", props.id), [props.changeFilter, props.id]);
@@ -52,7 +53,15 @@ export const Todolist = React.memo((props: PropsType) => {
             tasks = tasks.filter(t => t.isDone === true);
         }
 
-        return <div >
+        const removeTask = (taskId: string) => props.removeTask(taskId, props.id)
+        const onChangeStatusHandler = (taskId: string, newStatus: boolean) => {
+            props.changeTaskStatus(taskId, newStatus, props.id);
+        }
+        const onTitleChangeHandler = (taskId: string, newValue: string) => {
+            props.changeTaskTitle(taskId, newValue, props.id);
+        }
+
+        return <div>
             <h3><EditableSpan value={props.title} onChange={changeTodolistTitle}/>
                 <IconButton onClick={removeTodolist}>
                     <Delete/>
@@ -63,16 +72,6 @@ export const Todolist = React.memo((props: PropsType) => {
                 {
                     tasks.map(t => {
                         console.log('task')
-                        const removeTask = (taskId: string) => props.removeTask(taskId, props.id)
-                        const onChangeStatusHandler = (taskId: string, newStatus: boolean) => {
-
-                            props.changeTaskStatus(taskId, newStatus, props.id);
-                        }
-                        const onTitleChangeHandler = (taskId: string, newValue: string) => {
-                            props.changeTaskTitle(taskId, newValue, props.id);
-                        }
-
-
                         return <Task key={t.id}
                                      task={t}
                                      removeTask={removeTask}
