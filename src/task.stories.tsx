@@ -1,7 +1,8 @@
 import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
 import {action} from "@storybook/addon-actions";
-import { Task } from './task';
+import {Task} from './Task';
+
 
 export default {
     title: 'Todolist/Task',
@@ -20,14 +21,14 @@ export const TaskIsDoneExample = Template.bind({});
 TaskIsDoneExample.args = {
     ...baseArgs,
    task:{id:'1',isDone:true, title:"JS"},
-   // todolistId:"todoListId1"
+    todolistId:"todoListId1"
 };
 
 export const TaskIsNotDoneExample = Template.bind({});
 TaskIsNotDoneExample.args = {
     ...baseArgs,
     task:{id:'1',isDone:false, title:"JS"},
-    //todolistId:"todoListId1"
+    todolistId:"todoListId1"
 };
 
 
