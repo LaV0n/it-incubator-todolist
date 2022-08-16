@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ReactNode} from 'react'
 import {Provider} from 'react-redux'
 import {combineReducers, createStore} from 'redux'
 import {v1} from 'uuid'
@@ -31,7 +31,7 @@ const initialGlobalState = {
 
 export const storyBookStore = createStore(rootReducer, initialGlobalState as AppRootStateType);
 
-export const ReduxStoreProviderDecorator = (storyFn: any) => (
+export const ReduxStoreProviderDecorator = (storyFn: () => JSX.Element) => (
     <Provider
         store={storyBookStore}>{storyFn()}
     </Provider>)
