@@ -21,6 +21,9 @@ type FormikErrorType = {
 
 
 export const Login = () => {
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -47,8 +50,6 @@ export const Login = () => {
             formik.resetForm()
         }
     })
-    const dispatch = useDispatch();
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
     if(isLoggedIn){
         return <Navigate to={'/'}/>
