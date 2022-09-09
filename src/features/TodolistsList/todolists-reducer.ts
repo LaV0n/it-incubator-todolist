@@ -86,9 +86,11 @@ export const addTodolistTC = (title: string) => {
 }
 export const changeTodolistTitleTC = (id: string, title: string) => {
     return (dispatch: Dispatch) => {
+        dispatch(changeTodolistEntityStatusAC({id, status: 'loading'}))
         todolistsAPI.updateTodolist(id, title)
             .then((res) => {
                 dispatch(changeTodolistTitleAC({id, title}))
+                dispatch(changeTodolistEntityStatusAC({id, status: 'succeeded'}))
             })
     }
 }
