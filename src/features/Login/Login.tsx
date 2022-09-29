@@ -1,13 +1,19 @@
 import React from 'react'
 import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField, Button, Grid} from '@material-ui/core'
-import {useFormik} from 'formik'
-import {useDispatch, useSelector} from 'react-redux'
+import {FormikHelpers, useFormik} from 'formik'
+import { useSelector} from 'react-redux'
 import {loginTC} from './auth-reducer'
-import {AppRootStateType} from '../../app/store'
-import { Redirect } from 'react-router-dom'
+import {AppRootStateType, useAppDispatch} from '../../app/store'
+import {Redirect} from 'react-router-dom'
+
+type FormValuesType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
 
 export const Login = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
 
@@ -30,13 +36,19 @@ export const Login = () => {
             password: '',
             rememberMe: false
         },
-        onSubmit: values => {
-            dispatch(loginTC(values));
+        onSubmit: async (values: FormValuesType, formikHelpers: FormikHelpers<FormValuesType>) => {
+            const res = await dispatch(loginTC(values));
+            if (res.type === loginTC.rejected.type) {/*
+                if (res.payload.fieldErrors) {
+                    formikHelpers.setFieldError('email', 'ERROR')
+                }*/
+            }
+
         },
     })
 
     if (isLoggedIn) {
-        return <Redirect to={"/"} />
+        return <Redirect to={"/"}/>
     }
 
 
