@@ -1,25 +1,5 @@
 
 .App {
- background-color: #d7d9f5;
+ background-color: rgba(215, 217, 245, 0.6);
+ height: 100vh;
 }
-/*
-.App > div {
-  margin-right: 50px;
-}
-
-.error {
-  border: red 1px solid;
-}
-
-.error-message {
-  color: red;
-}
-
-.active-filter {
-  background-color: aquamarine;
-}
-
-.is-done {
-  opacity: 0.5;
-}
-*/
