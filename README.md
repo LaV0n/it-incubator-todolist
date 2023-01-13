@@ -1,5 +1,5 @@
 # Todo List
-*React/Redux/MUI/Axios/Jest/Formik*
+Stack: *React/Redux/MUI/Axios/Jest/Formik*
 
 [link](https://lav0n.github.io/it-incubator-todolist/)
 
