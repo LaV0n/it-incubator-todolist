@@ -16,10 +16,10 @@ const slice = createSlice({
         }
     },
     extraReducers: builder => {
-        builder.addCase(loginTC.fulfilled, (state, action) => {
+        builder.addCase(loginTC.fulfilled, (state) => {
             state.isLoggedIn = true
         })
-        builder.addCase(logoutTC.fulfilled, (state, action) => {
+        builder.addCase(logoutTC.fulfilled, (state) => {
             state.isLoggedIn = false
         })
     }
@@ -41,11 +41,11 @@ export const loginTC = createAsyncThunk
             thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
             return
         } else {
-            handleServerAppError(res.data, thunkAPI.dispatch)
+            handleServerAppError(res.data)
             return thunkAPI.rejectWithValue({errors: res.data.messages})
         }
     } catch (err: any) {
-        handleServerNetworkError(err, thunkAPI.dispatch)
+        handleServerNetworkError(err)
         return {isLoggedIn: true}
     }
 })
@@ -57,11 +57,11 @@ export const logoutTC = createAsyncThunk('auth/logout', async (arg, thunkAPI) =>
             thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
             return
         } else {
-            handleServerAppError(res.data, thunkAPI.dispatch)
+            handleServerAppError(res.data)
             return thunkAPI.rejectWithValue({})
         }
     } catch (err: any) {
-        handleServerNetworkError(err, thunkAPI.dispatch)
+        handleServerNetworkError(err)
         return thunkAPI.rejectWithValue({})
     }
 })

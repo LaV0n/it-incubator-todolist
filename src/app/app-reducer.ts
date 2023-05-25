@@ -37,6 +37,7 @@ export const {setAppErrorAC,setAppStatusAC}=slice.actions
 
 export const initializeAppTC =createAsyncThunk('app/initialize',async (arg, {dispatch})=>{
     const res= await authAPI.me()
+
     if (res.data.resultCode === 0) {
         dispatch(setIsLoggedInAC({value:true}));
     } else {  }

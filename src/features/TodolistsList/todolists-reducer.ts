@@ -1,6 +1,5 @@
 import {todolistsAPI, TodolistType} from '../../api/todolists-api'
 import {RequestStatusType, setAppStatusAC} from '../../app/app-reducer'
-import {handleServerNetworkError} from '../../utils/error-utils'
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState: Array<TodolistDomainType> = []
@@ -44,13 +43,14 @@ export const { changeTodolistFilterAC,changeTodolistEntityStatusAC}= slice.actio
 // thunks
 
 export const fetchTodolistsTC =createAsyncThunk('todolists/fetchTodolists',async (arg, thunkAPI)=> {
+
     thunkAPI.dispatch(setAppStatusAC({status: 'loading'}))
     try {
         const res = await todolistsAPI.getTodolists()
         thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
         return {todolists: res.data}
     } catch (error: any) {
-        handleServerNetworkError(error, thunkAPI.dispatch);
+       // handleServerNetworkError(error);
         return thunkAPI.rejectWithValue({})
     }
 })
@@ -63,7 +63,7 @@ export const removeTodolistTC =createAsyncThunk('todolists/removeTodolist',async
         thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
         return {id: todolistId}
     } catch (error: any) {
-        handleServerNetworkError(error, thunkAPI.dispatch);
+       // handleServerNetworkError(error);
         return thunkAPI.rejectWithValue({})
     }
 })
@@ -75,7 +75,7 @@ export const addTodolistTC =createAsyncThunk('todolists/addTodolist',async (titl
         thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
         return {todolist: res.data.data.item}
     } catch (error: any) {
-        handleServerNetworkError(error, thunkAPI.dispatch);
+        //handleServerNetworkError(error);
         return thunkAPI.rejectWithValue({})
     }
 })
@@ -87,7 +87,7 @@ export const changeTodolistTitleTC =createAsyncThunk('todolists/changeTodolist',
         thunkAPI.dispatch(changeTodolistEntityStatusAC({id:params.id, status: 'succeeded'}))
         return params
     } catch (error: any) {
-        handleServerNetworkError(error, thunkAPI.dispatch);
+        //handleServerNetworkError(error);
         return thunkAPI.rejectWithValue({})
     }
 })

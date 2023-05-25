@@ -16,19 +16,23 @@ import {Grid, Paper} from '@material-ui/core'
 import {AddItemForm} from '../../components/AddItemForm/AddItemForm'
 import {Todolist} from './Todolist/Todolist'
 import { Redirect } from 'react-router-dom'
+import {observer} from "mobx-react-lite";
+import auth from "../../store/auth";
 
 type PropsType = {
     demo?: boolean
 }
 
-export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
+export const TodolistsList: React.FC<PropsType> = observer(({demo }) => {
+
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const isLoggedIn =  auth.isLoggedIn
 
     const dispatch = useDispatch()
 
     useEffect(() => {
+
         if (demo || !isLoggedIn) {
             return;
         }
@@ -79,7 +83,6 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     if (!isLoggedIn) {
         return <Redirect to={"/login"} />
     }
-
     return <>
         <Grid container style={{padding: '20px'}}>
             <AddItemForm addItem={addTodolist}/>
@@ -109,4 +112,4 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
             }
         </Grid>
     </>
-}
+})

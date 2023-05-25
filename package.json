@@ -21,6 +21,8 @@
     "@types/uuid": "^7.0.3",
     "axios": "^0.19.2",
     "formik": "^2.1.5",
+    "mobx": "^6.9.0",
+    "mobx-react-lite": "^3.4.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -32,7 +34,7 @@
     "uuid": "^8.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

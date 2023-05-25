@@ -72,11 +72,11 @@ export const addTaskTC = createAsyncThunk('task/addTask', async (param: { title:
             dispatch(setAppStatusAC({status: 'succeeded'}))
             return res.data.data.item
         } else {
-            handleServerAppError(res.data, dispatch);
+          //  handleServerAppError(res.data);
             return rejectWithValue({})
         }
     } catch (error: any) {
-        handleServerNetworkError(error, dispatch)
+        //handleServerNetworkError(error)
         return rejectWithValue({})
     }
 })
@@ -105,12 +105,12 @@ export const updateTaskTC = createAsyncThunk('task/updateTask', async (param: { 
             thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
         return param
         } else {
-            handleServerAppError(res.data, thunkAPI.dispatch);
+           // handleServerAppError(res.data);
             return thunkAPI.rejectWithValue({})
         }
 
     } catch (error: any) {
-        handleServerNetworkError(error, thunkAPI.dispatch)
+       // handleServerNetworkError(error)
         return thunkAPI.rejectWithValue({})
     }
 })
