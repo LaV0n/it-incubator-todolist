@@ -1,9 +1,6 @@
 import React from 'react'
 import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField, Button, Grid} from '@material-ui/core'
-import {FormikHelpers, useFormik} from 'formik'
-import { useSelector} from 'react-redux'
-import {loginTC} from './auth-reducer'
-import {AppRootStateType, useAppDispatch} from '../../app/store'
+import { useFormik} from 'formik'
 import {Redirect} from 'react-router-dom'
 import auth from "../../store/auth";
 import {observer} from "mobx-react-lite";
