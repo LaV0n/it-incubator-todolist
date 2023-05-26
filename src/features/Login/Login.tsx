@@ -5,6 +5,8 @@ import { useSelector} from 'react-redux'
 import {loginTC} from './auth-reducer'
 import {AppRootStateType, useAppDispatch} from '../../app/store'
 import {Redirect} from 'react-router-dom'
+import auth from "../../store/auth";
+import {observer} from "mobx-react-lite";
 
 type FormValuesType = {
     email: string
@@ -12,10 +14,9 @@ type FormValuesType = {
     rememberMe: boolean
 }
 
-export const Login = () => {
-    const dispatch = useAppDispatch()
+export const Login = observer(() => {
 
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
+    const isLoggedIn = auth.isLoggedIn
 
     const formik = useFormik({
         validate: (values) => {
@@ -29,21 +30,14 @@ export const Login = () => {
                     password: 'Password is required'
                 }
             }
-
         },
         initialValues: {
             email: '',
             password: '',
             rememberMe: false
         },
-        onSubmit: async (values: FormValuesType, formikHelpers: FormikHelpers<FormValuesType>) => {
-            const res = await dispatch(loginTC(values));
-            if (res.type === loginTC.rejected.type) {/*
-                if (res.payload.fieldErrors) {
-                    formikHelpers.setFieldError('email', 'ERROR')
-                }*/
-            }
-
+        onSubmit:  (values: FormValuesType) => {
+           auth.logIn(values);
         },
     })
 
@@ -51,8 +45,7 @@ export const Login = () => {
         return <Redirect to={"/"}/>
     }
 
-
-    return <Grid container justify="center">
+    return <Grid container justifyContent="center">
         <Grid item xs={4}>
             <form onSubmit={formik.handleSubmit}>
                 <FormControl>
@@ -76,14 +69,18 @@ export const Login = () => {
                             margin="normal"
                             {...formik.getFieldProps("email")}
                         />
-                        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                        {formik.errors.email
+                            ? <div style={{color:"red"}}>{formik.errors.email}</div>
+                            : null}
                         <TextField
                             type="password"
                             label="Password"
                             margin="normal"
                             {...formik.getFieldProps("password")}
                         />
-                        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+                        {formik.errors.password
+                            ? <div style={{color:"red"}}>{formik.errors.password}</div>
+                            : null}
                         <FormControlLabel
                             label={'Remember me'}
                             control={<Checkbox
@@ -91,10 +88,14 @@ export const Login = () => {
                                 checked={formik.values.rememberMe}
                             />}
                         />
-                        <Button type={'submit'} variant={'contained'} color={'primary'}>Login</Button>
+                        <Button type={'submit'}
+                                variant={'contained'}
+                                disabled={!formik.values.email || !formik.values.password}
+                                color={'primary'}>
+                            Login</Button>
                     </FormGroup>
                 </FormControl>
             </form>
         </Grid>
     </Grid>
-}
+})

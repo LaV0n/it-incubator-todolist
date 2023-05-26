@@ -17,12 +17,15 @@ class Init {
         this.status=status
     }
     initializeApp= flow( function* (this:Init){
-
         try {
             const res= yield authAPI.me()
             if (res.data.resultCode === 0) {
                 this.isInitialized=true
                 auth.setIsLoggedIn(true)
+            }
+            if (res.data.resultCode === 1) {
+                this.isInitialized=true
+                auth.setIsLoggedIn(false)
             }
         } catch (err){
             this.error='error'

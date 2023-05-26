@@ -1,26 +1,22 @@
 import React from 'react'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert, {AlertProps} from '@material-ui/lab/Alert'
-import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from '../../app/store'
-import {setAppErrorAC} from '../../app/app-reducer'
+import init from "../../store/init";
+import {observer} from "mobx-react-lite";
 
 function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
-export function ErrorSnackbar() {
-    //const [open, setOpen] = React.useState(true)
-    const error = useSelector<AppRootStateType, string | null>(state => state.app.error);
-    const dispatch = useDispatch()
+export const ErrorSnackbar= observer(function (){
 
+    const error =init.error
     const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') {
             return
         }
-        dispatch(setAppErrorAC({error:null}));
+        init.setAppError(null);
     }
-
 
     const isOpen = error !== null;
 
@@ -32,3 +28,4 @@ export function ErrorSnackbar() {
         </Snackbar>
     )
 }
+)

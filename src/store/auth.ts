@@ -12,13 +12,14 @@ class Auth{
     setIsLoggedIn(value: boolean ){
         this.isLoggedIn=value
     }
-    logIn=flow(function*(param:LoginParamsType){
+    logIn=flow(function*(this:Auth,param:LoginParamsType){
         init.setAppStatus('loading')
+
         try {
             const res = yield authAPI.login(param)
             if (res.data.resultCode === 0) {
                 init.setAppStatus('succeeded')
-                return
+                this.isLoggedIn=true
             }else {
                 handleServerAppError(res.data)
             }
@@ -27,13 +28,13 @@ class Auth{
             init.setAppError('error')
         }
     })
-    logOut=flow(function* (){
+    logOut=flow(function* (this:Auth){
         init.setAppStatus('loading')
         try {
             const res = yield authAPI.logout()
             if (res.data.resultCode === 0) {
                 init.setAppStatus('succeeded')
-                return
+                this.isLoggedIn=false
             }else {
                 handleServerAppError(res.data)
             }
