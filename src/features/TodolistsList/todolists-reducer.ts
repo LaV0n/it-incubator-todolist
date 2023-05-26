@@ -1,6 +1,7 @@
-import {todolistsAPI, TodolistType} from '../../api/todolists-api'
+import {todolistsAPI} from '../../api/todolists-api'
 import {RequestStatusType, setAppStatusAC} from '../../app/app-reducer'
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {FilterValuesType, TodolistDomainType} from "../../store/todolists";
 
 const initialState: Array<TodolistDomainType> = []
 
@@ -91,12 +92,3 @@ export const changeTodolistTitleTC =createAsyncThunk('todolists/changeTodolist',
         return thunkAPI.rejectWithValue({})
     }
 })
-
-// types
-
-export type FilterValuesType = 'all' | 'active' | 'completed';
-export type TodolistDomainType = TodolistType & {
-    filter: FilterValuesType
-    entityStatus: RequestStatusType
-}
-
