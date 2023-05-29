@@ -1,9 +1,9 @@
 import {addTodolistTC, fetchTodolistsTC, removeTodolistTC} from './todolists-reducer'
-import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from '../../api/todolists-api'
+import {TaskPriorities, TaskStatuses, todolistsAPI, UpdateTaskModelType} from '../../api/todolists-api'
 import {AppRootStateType} from '../../app/store'
 import {setAppStatusAC} from '../../app/app-reducer'
-import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils'
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {TasksStateType} from "../../store/tasks";
 
 const initialState: TasksStateType = {}
 
@@ -123,7 +123,4 @@ export type UpdateDomainTaskModelType = {
     priority?: TaskPriorities
     startDate?: string
     deadline?: string
-}
-export type TasksStateType = {
-    [key: string]: Array<TaskType>
 }

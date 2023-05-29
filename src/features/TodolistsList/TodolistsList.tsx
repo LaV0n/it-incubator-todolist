@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from '../../app/store'
-import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from './tasks-reducer'
+import {useDispatch} from 'react-redux'
+import {addTaskTC, removeTaskTC, updateTaskTC} from './tasks-reducer'
 import {TaskStatuses} from '../../api/todolists-api'
 import {Grid, Paper} from '@material-ui/core'
 import {AddItemForm} from '../../components/AddItemForm/AddItemForm'
@@ -18,7 +17,6 @@ type PropsType = {
 export const TodolistsList: React.FC<PropsType> = observer(({demo }) => {
 
     const todolistsItems = todolists.todos
-    const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const isLoggedIn =  auth.isLoggedIn
 
     const dispatch = useDispatch()
@@ -62,13 +60,11 @@ export const TodolistsList: React.FC<PropsType> = observer(({demo }) => {
         <Grid container spacing={3}>
             {
                 todolistsItems.map(tl => {
-                    let allTodolistTasks = tasks[tl.id]
-
                     return <Grid item key={tl.id}>
                         <Paper style={{padding: '10px'}}>
                             <Todolist
                                 todolist={tl}
-                                tasks={allTodolistTasks}
+
                                 removeTask={removeTask}
                                 addTask={addTask}
                                 changeTaskStatus={changeStatus}
