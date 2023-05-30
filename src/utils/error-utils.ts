@@ -1,16 +1,16 @@
-import {ResponseType} from '../api/todolists-api'
-import init from "../store/init";
+import { ResponseType } from '../api/todolists-api'
+import init from '../store/init'
 
 export const handleServerAppError = <D>(data: ResponseType<D>) => {
-    if (data.messages.length) {
-        init.setAppError(data.messages[0])
-    } else {
-        init.setAppError('Some error occurred')
-    }
-    init.setAppStatus('failed')
+   if (data.messages.length) {
+      init.setAppError(data.messages[0])
+   } else {
+      init.setAppError('Some error occurred')
+   }
+   init.setAppStatus('failed')
 }
 
 export const handleServerNetworkError = (error: { message: string }) => {
-    init.setAppError(error.message ? error.message : 'Some error occurred')
-    init.setAppStatus('failed')
+   init.setAppError(error.message ? error.message : 'Some error occurred')
+   init.setAppStatus('failed')
 }
