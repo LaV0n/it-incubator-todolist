@@ -1,25 +1,13 @@
 import { flow, makeAutoObservable } from 'mobx'
-import {
-   TaskPriorities,
-   TaskStatuses,
-   TaskType,
-   todolistsAPI,
-   UpdateTaskModelType,
-} from '../api/todolists-api'
+import { todolistsAPI } from '../api/todolists-api'
 import init from './init'
-import { handleServerAppError, handleServerNetworkError } from '../utils/error-utils'
+import { handleServerAppError, handleServerNetworkError } from '../common/utils/error-utils'
+import {
+   TasksStateType,
+   UpdateDomainTaskModelType,
+   UpdateTaskModelType,
+} from '../common/types/types'
 
-export type TasksStateType = {
-   [key: string]: Array<TaskType>
-}
-export type UpdateDomainTaskModelType = {
-   title?: string
-   description?: string
-   status?: TaskStatuses
-   priority?: TaskPriorities
-   startDate?: string
-   deadline?: string
-}
 class Tasks {
    tasksData: TasksStateType = {}
 

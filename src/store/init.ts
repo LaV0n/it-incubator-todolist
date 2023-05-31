@@ -1,8 +1,8 @@
 import { flow, makeAutoObservable } from 'mobx'
 import { authAPI } from '../api/todolists-api'
 import auth from './auth'
+import { RequestStatusType } from '../common/types/types'
 
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 class Init {
    status: RequestStatusType = 'idle'
    error: string | null = null

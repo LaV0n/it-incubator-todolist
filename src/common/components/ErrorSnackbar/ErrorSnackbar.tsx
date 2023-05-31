@@ -1,7 +1,7 @@
 import React from 'react'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
-import init from '../../store/init'
+import init from '../../../store/init'
 import { observer } from 'mobx-react-lite'
 
 function Alert(props: AlertProps) {

@@ -1,7 +1,8 @@
 import { flow, makeAutoObservable } from 'mobx'
 import init from './init'
-import { authAPI, LoginParamsType } from '../api/todolists-api'
-import { handleServerAppError, handleServerNetworkError } from '../utils/error-utils'
+import { authAPI } from '../api/todolists-api'
+import { handleServerAppError, handleServerNetworkError } from '../common/utils/error-utils'
+import { LoginParamsType } from '../common/types/types'
 
 class Auth {
    isLoggedIn = false

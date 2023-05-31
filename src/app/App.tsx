@@ -5,25 +5,20 @@ import {
    Button,
    CircularProgress,
    Container,
-   IconButton,
    LinearProgress,
    Toolbar,
    Typography,
 } from '@material-ui/core'
-import { Menu } from '@material-ui/icons'
 import { TodolistsList } from '../features/TodolistsList/TodolistsList'
-import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar'
+import { ErrorSnackbar } from '../common/components/ErrorSnackbar/ErrorSnackbar'
 import { Route } from 'react-router-dom'
 import { Login } from '../features/Login/Login'
 import init from '../store/init'
 import auth from '../store/auth'
 import { observer } from 'mobx-react-lite'
+import { ComponentType } from '../common/types/types'
 
-type PropsType = {
-   demo?: boolean
-}
-
-const App = observer(({ demo = false }: PropsType) => {
+const App = observer(({ demo = false }: ComponentType) => {
    const status = init.status
    const isInitialized = init.isInitialized
    const isLoggedIn = auth.isLoggedIn
@@ -49,12 +44,13 @@ const App = observer(({ demo = false }: PropsType) => {
          <ErrorSnackbar />
          <AppBar position="static">
             <Toolbar>
-               <IconButton edge="start" color="inherit" aria-label="menu">
-                  <Menu />
-               </IconButton>
-               <Typography variant="h6">News</Typography>
+               <Typography variant="h6">Todolists</Typography>
                {isLoggedIn && (
-                  <Button color="inherit" onClick={logoutHandler}>
+                  <Button
+                     color="inherit"
+                     onClick={logoutHandler}
+                     style={{ right: 20, position: 'absolute' }}
+                  >
                      Log out
                   </Button>
                )}

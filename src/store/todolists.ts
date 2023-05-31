@@ -1,14 +1,15 @@
 import { flow, makeAutoObservable } from 'mobx'
-import { todolistsAPI, TodolistType } from '../api/todolists-api'
-import init, { RequestStatusType } from './init'
-import { handleServerNetworkError } from '../utils/error-utils'
+import { todolistsAPI } from '../api/todolists-api'
+import init from './init'
+import { handleServerNetworkError } from '../common/utils/error-utils'
 import tasks from './tasks'
+import {
+   FilterValuesType,
+   RequestStatusType,
+   TodolistDomainType,
+   TodolistType,
+} from '../common/types/types'
 
-export type FilterValuesType = 'all' | 'active' | 'completed'
-export type TodolistDomainType = TodolistType & {
-   filter: FilterValuesType
-   entityStatus: RequestStatusType
-}
 class Todolists {
    todos: TodolistDomainType[] = []
    constructor() {

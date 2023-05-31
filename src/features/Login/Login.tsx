@@ -13,12 +13,7 @@ import { useFormik } from 'formik'
 import { Redirect } from 'react-router-dom'
 import auth from '../../store/auth'
 import { observer } from 'mobx-react-lite'
-
-type FormValuesType = {
-   email: string
-   password: string
-   rememberMe: boolean
-}
+import { FormValuesType } from '../../common/types/types'
 
 export const Login = observer(() => {
    const isLoggedIn = auth.isLoggedIn

@@ -1,5 +1,5 @@
-import { ResponseType } from '../api/todolists-api'
-import init from '../store/init'
+import init from '../../store/init'
+import { ResponseType } from '../types/types'
 
 export const handleServerAppError = <D>(data: ResponseType<D>) => {
    if (data.messages.length) {

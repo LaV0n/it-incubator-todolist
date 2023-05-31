@@ -1,22 +1,15 @@
 import React, { useCallback, useEffect } from 'react'
-import { AddItemForm } from '../../../components/AddItemForm/AddItemForm'
-import { EditableSpan } from '../../../components/EditableSpan/EditableSpan'
+import { AddItemForm } from '../../../common/components/AddItemForm/AddItemForm'
+import { EditableSpan } from '../../../common/components/EditableSpan/EditableSpan'
 import { Button, IconButton } from '@material-ui/core'
 import { Delete } from '@material-ui/icons'
 import { Task } from './Task/Task'
-import { TaskStatuses } from '../../../api/todolists-api'
-import todolists, { FilterValuesType, TodolistDomainType } from '../../../store/todolists'
+import todolists from '../../../store/todolists'
 import { observer } from 'mobx-react-lite'
 import tasks from '../../../store/tasks'
+import { FilterValuesType, TaskStatuses, TodolistComponentType } from '../../../common/types/types'
 
-type PropsType = {
-   todolist: TodolistDomainType
-   demo?: boolean
-}
-
-export const Todolist = observer(function ({ demo = false, todolist }: PropsType) {
-   console.log('Todolist called')
-
+export const Todolist = observer(function ({ demo = false, todolist }: TodolistComponentType) {
    const tasksData = tasks.tasksData[todolist.id]
 
    useEffect(() => {
@@ -54,7 +47,6 @@ export const Todolist = observer(function ({ demo = false, todolist }: PropsType
    if (todolist.filter === 'completed') {
       tasksForTodolist = tasksData.filter(t => t.status === TaskStatuses.Completed)
    }
-
    return (
       <div>
          <h3>
@@ -63,7 +55,11 @@ export const Todolist = observer(function ({ demo = false, todolist }: PropsType
                <Delete />
             </IconButton>
          </h3>
-         <AddItemForm addItem={addTask} disabled={todolist.entityStatus === 'loading'} />
+         <AddItemForm
+            addItem={addTask}
+            disabled={todolist.entityStatus === 'loading'}
+            placeholder={'new Task'}
+         />
          <div>
             {tasksForTodolist &&
                tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={todolist.id} />)}
