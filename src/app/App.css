@@ -3,3 +3,9 @@
  background-color: rgba(215, 217, 245, 0.6);
  min-height: 100vh;
 }
+.progress{
+position: relative;
+height: 4px;
+
+ width: 100%;
+}

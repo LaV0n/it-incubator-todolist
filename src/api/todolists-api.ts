@@ -13,7 +13,7 @@ const settings = {
       'API-KEY': '45599275-fc7c-4215-aaa5-a9a36d291e1f',
    },
 }
-const instance = axios.create({
+export const instance = axios.create({
    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
    ...settings,
 })

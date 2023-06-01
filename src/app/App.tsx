@@ -33,7 +33,14 @@ const App = observer(({ demo = false }: ComponentType) => {
 
    if (!isInitialized) {
       return (
-         <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
+         <div
+            style={{
+               position: 'fixed',
+               top: '30%',
+               textAlign: 'center',
+               width: '100%',
+            }}
+         >
             <CircularProgress />
          </div>
       )
@@ -55,9 +62,9 @@ const App = observer(({ demo = false }: ComponentType) => {
                   </Button>
                )}
             </Toolbar>
-            {status === 'loading' && <LinearProgress />}
+            <div className="progress">{status === 'loading' && <LinearProgress />}</div>
          </AppBar>
-         <Container fixed>
+         <Container>
             <Route exact path={'/'} render={() => <TodolistsList demo={demo} />} />
             <Route path={'/login'} render={() => <Login />} />
          </Container>
