@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite'
 import auth from '../../store/auth'
 import todolists from '../../store/todolists'
 import { ComponentType } from '../../common/types/types'
+import '../../app/App.css'
 
 export const TodolistsList: React.FC<ComponentType> = observer(({ demo }) => {
    const todolistsItems = todolists.todos
@@ -26,13 +27,24 @@ export const TodolistsList: React.FC<ComponentType> = observer(({ demo }) => {
    }
    return (
       <>
-         <Grid container style={{ padding: '20px' }}>
+         <Grid
+            container
+            style={{ margin: 20, width: 315, padding: 20 }}
+            className="formControl"
+            justifyContent={'center'}
+         >
             <AddItemForm addItem={addTodolist} placeholder={'new List'} />
          </Grid>
          <Grid container spacing={3} justifyContent={'center'}>
             {todolistsItems.map(tl => (
                <Grid item key={tl.id}>
-                  <Paper style={{ padding: '10px' }}>
+                  <Paper
+                     style={{
+                        padding: 10,
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        borderRadius: 15,
+                     }}
+                  >
                      <Todolist todolist={tl} demo={demo} />
                   </Paper>
                </Grid>

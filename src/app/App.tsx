@@ -49,7 +49,7 @@ const App = observer(({ demo = false }: ComponentType) => {
    return (
       <div className="App">
          <ErrorSnackbar />
-         <AppBar position="static">
+         <AppBar position="static" style={{ background: 'rgba(13, 114, 8, 0.8)' }}>
             <Toolbar>
                <Typography variant="h6">Todolists</Typography>
                {isLoggedIn && (

@@ -14,6 +14,7 @@ import { Redirect } from 'react-router-dom'
 import auth from '../../store/auth'
 import { observer } from 'mobx-react-lite'
 import { FormValuesType } from '../../common/types/types'
+import '../../app/App.css'
 
 export const Login = observer(() => {
    const isLoggedIn = auth.isLoggedIn
@@ -49,7 +50,7 @@ export const Login = observer(() => {
       <Grid container justifyContent="center">
          <Grid item xs={4}>
             <form onSubmit={formik.handleSubmit}>
-               <FormControl>
+               <FormControl className="formControl" style={{ padding: 20, marginTop: 20 }}>
                   <FormLabel>
                      <p>
                         To log in get registered{' '}
@@ -92,7 +93,12 @@ export const Login = observer(() => {
                         type={'submit'}
                         variant={'contained'}
                         disabled={!formik.values.email || !formik.values.password}
-                        color={'primary'}
+                        style={{
+                           backgroundColor:
+                              !formik.values.email || !formik.values.password
+                                 ? 'rgba(13, 114, 8, 0.2)'
+                                 : 'rgba(13, 114, 8, 0.8)',
+                        }}
                      >
                         Login
                      </Button>
