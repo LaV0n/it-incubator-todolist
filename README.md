@@ -1,5 +1,6 @@
 # Todo List
 todolist with REST API and error checking
+
 Stack: *React/Redux-Toolkit(MobX)/MUI/Axios/Jest/Formik*
 
 [link](https://lav0n.github.io/it-incubator-todolist/)
