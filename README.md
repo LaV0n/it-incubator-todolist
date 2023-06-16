@@ -1,5 +1,5 @@
 # Todo List
-todolist with REST API and error checking
+todolist with REST API, error checking and test account
 
 Stack: *React/Redux-Toolkit(MobX)/MUI/Axios/Jest/Formik*
 
