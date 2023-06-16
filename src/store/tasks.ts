@@ -15,6 +15,9 @@ class Tasks {
       makeAutoObservable(this)
    }
 
+   clearAllTasks() {
+      this.tasksData = {}
+   }
    fetchTasks = flow(function* (this: Tasks, todolistId: string) {
       init.setAppStatus('loading')
       try {

@@ -42,6 +42,15 @@ export const Login = observer(() => {
       },
    })
 
+   const testAccountLogin = () => {
+      const testUser = {
+         email: 'free@samuraijs.com',
+         password: 'free',
+         rememberMe: false,
+      }
+      auth.logIn(testUser)
+   }
+
    if (isLoggedIn) {
       return <Redirect to={'/'} />
    }
@@ -62,9 +71,12 @@ export const Login = observer(() => {
                            here
                         </a>
                      </p>
-                     <p>or use common test account credentials:</p>
-                     <p> Email: free@samuraijs.com</p>
-                     <p>Password: free</p>
+                     <p>
+                        or use
+                        <span className="testAccountTitle" onClick={testAccountLogin}>
+                           common test account
+                        </span>
+                     </p>
                   </FormLabel>
                   <FormGroup>
                      <TextField label="Email" margin="normal" {...formik.getFieldProps('email')} />

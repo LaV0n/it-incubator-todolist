@@ -3,6 +3,7 @@ import init from './init'
 import { authAPI } from '../api/todolists-api'
 import { handleServerAppError, handleServerNetworkError } from '../common/utils/error-utils'
 import { LoginParamsType } from '../common/types/types'
+import todolists from './todolists'
 
 class Auth {
    isLoggedIn = false
@@ -35,6 +36,7 @@ class Auth {
          const res = yield authAPI.logout()
          if (res.data.resultCode === 0) {
             init.setAppStatus('succeeded')
+            todolists.clearAllTodolists()
             this.isLoggedIn = false
          } else {
             handleServerAppError(res.data)

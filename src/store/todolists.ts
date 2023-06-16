@@ -15,6 +15,10 @@ class Todolists {
    constructor() {
       makeAutoObservable(this)
    }
+   clearAllTodolists() {
+      this.todos = []
+      tasks.clearAllTasks()
+   }
    changeTodolistFilter(id: string, filter: FilterValuesType) {
       const index = this.todos.findIndex(tl => tl.id === id)
       this.todos[index].filter = filter
